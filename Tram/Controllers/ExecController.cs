@@ -33,7 +33,7 @@ namespace Tram.Controllers
                 string Password = Common.GetPFromTS("Password", dts_arr);
                 string Data     = Common.GetPFromTS("Data", dts_arr);
 
-                if (Name.Trim() != "")
+                if (Name.Trim() == "")
                 {
                     ret.Status = false;
                     ret.Description = "No 'Name' member specyfied.";
@@ -42,10 +42,8 @@ namespace Tram.Controllers
                 else
                 {
                     string fullPath = Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(IsDataBaseAccessibleController)).Location);
-
                     using (StreamReader sr = new StreamReader(Path.Combine(fullPath, "settings.txt")))
                     {
-
                         string SettingsLine = "";
                         List<string> lst_setting = new List<string>();
                         string curr_section = "";
@@ -55,12 +53,10 @@ namespace Tram.Controllers
                             SettingsLine = sr.ReadLine();
                             switch (SettingsLine)
                             {
-
                                 case "[folders]":
 
                                     curr_section = SettingsLine;
                                     break;
-
                                 default:
 
                                     switch (curr_section)
@@ -74,7 +70,6 @@ namespace Tram.Controllers
 
                                             break;
                                     }
-
                                     break;
                             }
                         }
@@ -87,28 +82,29 @@ namespace Tram.Controllers
                     {
                         if (Directory.Exists(Path.Combine(Path.Combine(folder, Name))))
                         {
-
                             if (db_path.Trim() != "")
                             {
-                                return Conflict(js.Serialize(new Result { Status = false, Description = "Bad settings file: more then one database in different folders!" }));
+                                ret.Status = false;
+                                ret.Description = "Bad settings file: more then one database in different folders!";
+                                ret_data = Conflict(js.Serialize(ret));
+                                break;
                             }
-
                             db_path = folder;
                         }
                     }
 
-                    using (v77Ops v77inst = new v77Ops())
+                    if (ret.Status)
                     {
-                        v77inst.CreateV77Instance();
+                        using (v77Ops v77inst = new v77Ops())
+                        {
+                            v77inst.CreateV77Instance();
 
-                        Result ret = v77inst.ExecuteBatch(Data, Path.Combine(db_path, Name), Login, Password);
+                            ret = v77inst.ExecuteBatch(Data, Path.Combine(db_path, Name), Login, Password);
+                            ret_data = new ObjectResult(js.Serialize(ret));
 
-                        return new ObjectResult(js.Serialize(ret));
-
+                        }
                     }
-
                 }
-
             }
 
             return (ObjectResult)ret_data;
