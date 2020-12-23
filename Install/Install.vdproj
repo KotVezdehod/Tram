@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_5B54B0511D914FF48198D523E5734F01"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_B279DF4373C445179F2CFE55D2FD6B25"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -49,6 +55,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -116,6 +130,26 @@
             {
             "SourcePath" = "8:..\\Tram\\Settings.txt"
             "TargetName" = "8:Settings.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_A684D7E9D57E48F48747A2642286EA31"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5B54B0511D914FF48198D523E5734F01"
+            {
+            "SourcePath" = "8:..\\ТестСоединения.epf"
+            "TargetName" = "8:ТестСоединения.epf"
             "Tag" = "8:"
             "Folder" = "8:_A684D7E9D57E48F48747A2642286EA31"
             "Condition" = "8:"
@@ -730,7 +764,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B279DF4373C445179F2CFE55D2FD6B25"
             {
-            "SourcePath" = "8:..\\Tram\\obj\\Release\\netcoreapp3.1\\Tram.dll"
+            "SourcePath" = "8:..\\Tram\\obj\\Debug\\netcoreapp3.1\\Tram.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A684D7E9D57E48F48747A2642286EA31"
