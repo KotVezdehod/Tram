@@ -65,6 +65,22 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 и x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
+            }
         }
     }
     "Deployable"
@@ -193,7 +209,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Tram"
         "ProductCode" = "8:{A965D4AE-FEDC-4051-934B-5FEDA5FA4B0F}"
-        "PackageCode" = "8:{1CB50966-3B45-40B9-9BD0-1E4F47522ED3}"
+        "PackageCode" = "8:{ADC3B1F1-5333-41EE-B2CC-AAC99AF06CFB}"
         "UpgradeCode" = "8:{7778FE92-F98E-4CD7-AF7B-23AA6EE25450}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
