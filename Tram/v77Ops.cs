@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text;
 
 
 namespace Tram
@@ -230,6 +232,155 @@ namespace Tram
 
             
         }
+        public Result GetData(string Code, string DataBasePath, string Login, string Password)
+        {
+            Dictionary<string, string> fn_to_kill = new Dictionary<string, string>();
+
+            fn_to_kill.Add("fn_empty", Path.GetTempFileName());
+
+            fn_to_kill.Add("fn_CodeListing", Path.Combine(DataBasePath, "CodeListing.txt"));
+
+            fn_to_kill.Add("fn_result", Path.GetTempFileName());
+
+            File.WriteAllBytes(fn_to_kill.GetValueOrDefault("fn_empty"), Properties.Resources.Empty);
+
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            using (StreamWriter sw = new StreamWriter(fn_to_kill.GetValueOrDefault("fn_CodeListing"), false, Encoding.GetEncoding("windows-1251")))
+            {
+                sw.WriteLine("Процедура ПриОткрытии()");
+                sw.WriteLine("");
+                sw.WriteLine("Попытка");
+                sw.WriteLine("");
+                sw.Write(Code);
+                sw.WriteLine("");
+                sw.WriteLine(Properties.Resources.FlushCode.ToString());
+                sw.WriteLine("");
+                sw.WriteLine("КонецПроцедуры");
+            }
+
+
+            try
+            {
+                string Каталог77 = Assembly.GetAssembly(v7_1c_comm_conn_cls_type).Location;
+
+                string СтрокаЛогина = Login == "" ? "" : " /n" + "\"" + Login + "\"";
+                string СтрокаПароля = Password == "" ? "" : " /p" + "\"" + Password + "\"";
+
+                string conn = "\"" + Каталог77 + "\"" + " /D" + "\"" + DataBasePath + "\"" + СтрокаЛогина + СтрокаПароля;
+
+                dynamic RMTrade = v7_1c_comm_conn_cls_type.InvokeMember("RMTrade", BindingFlags.Public | BindingFlags.GetProperty, null, v77_instance, null);
+
+                if (RMTrade == null)
+                {
+                    KillTmpFiles(fn_to_kill);
+
+                    return new Result { Status = false, Description = "Can't retrieve 'RMTrade' variable from com-server!" };
+                }
+
+                object[] init_params = new object[3];
+                init_params[0] = RMTrade;
+                init_params[1] = conn;
+                init_params[2] = "NO_SPLASH_SHOW";
+
+                if (!(bool)v7_1c_comm_conn_cls_type.InvokeMember("Initialize", BindingFlags.Public | BindingFlags.InvokeMethod,
+                    null, v77_instance, init_params))
+                {
+                    KillTmpFiles(fn_to_kill);
+                    return new Result { Status = false, Description = "Fail to connect to database." };
+                }
+
+                string Batch = "ОткрытьФорму(\"Отчет\"" + ", \"" + fn_to_kill.GetValueOrDefault("fn_result") + "\", \"" + fn_to_kill.GetValueOrDefault("fn_empty") + "\")";
+
+                string[] invoke_params = new string[1];
+                invoke_params[0] = Batch;
+
+                try
+                {
+
+                    bool res = (bool)v7_1c_comm_conn_cls_type.InvokeMember("ExecuteBatch", BindingFlags.Public | BindingFlags.InvokeMethod,
+                        null, v77_instance, invoke_params);
+
+                    if (res)
+                    {
+                        if (File.Exists(fn_to_kill.GetValueOrDefault("fn_result")))
+                        {
+                            bool IsError = false;
+
+                            using (StreamReader sr = new StreamReader(fn_to_kill.GetValueOrDefault("fn_result"), Encoding.GetEncoding("windows-1251")))
+                            {
+                                if (sr.EndOfStream)
+                                {
+                                    KillTmpFiles(fn_to_kill);
+
+                                    return new Result { Status = false, Description = "Empty results file detected after executing." };
+
+                                }
+
+                                string first_line = sr.ReadLine();
+
+                                if (!first_line.Contains("||||||"))
+                                {
+                                    IsError = true;
+
+                                }
+                            }
+
+                            using (StreamReader sr = new StreamReader(fn_to_kill.GetValueOrDefault("fn_result"), Encoding.GetEncoding("windows-1251")))
+                            {
+
+                                Result ret = new Result { Status = !IsError, Description = sr.ReadToEnd() };
+
+                                KillTmpFiles(fn_to_kill);
+
+                                return ret;
+
+                            }
+
+                        }
+                        else
+                        {
+                            KillTmpFiles(fn_to_kill);
+
+                            return new Result { Status = false, Description = "No results detected after executing. 1c 7.7 framework crashed, may be..." };
+                        }
+
+                    }
+                    else
+                    {
+                        KillTmpFiles(fn_to_kill);
+
+                        return new Result { Status = false, Description = "Fail to invoke 'ExecuteBatch' " };
+
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    KillTmpFiles(fn_to_kill);
+
+                    return new Result { Status = false, Description = "Fail to invoke 1c 77 method 'ОткрытьОтчет' " };
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                Result ret = new Result { Status = false };
+                if (e.InnerException != null)
+                {
+                    ret.Description = e.InnerException.Message;
+                }
+                else
+                {
+                    ret.Description = e.Message;
+                }
+
+                return ret;
+            }
+
+
+        }
+
         public Result CreateV77Instance()
         {
 
@@ -286,6 +437,27 @@ namespace Tram
 
             return res;
         }
+
+        public void KillTmpFiles(Dictionary<string, string> in_dict)
+        {
+            foreach (KeyValuePair<string, string> fn in in_dict)
+            {
+                try
+                {
+                    if (File.Exists(fn.Value))
+                    {
+                        File.Delete(fn.Value);
+                    }
+                    else if (Directory.Exists(fn.Value))
+                    {
+                        Directory.Delete(fn.Value, true);
+                    }
+                }
+                catch { }
+            }
+
+        }
+
         public void Dispose()
         {
             if (v77_instance != null)
