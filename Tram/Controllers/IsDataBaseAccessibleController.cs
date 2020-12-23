@@ -12,73 +12,46 @@ namespace Tram.Controllers
         [HttpPost]
         public async Task<ActionResult> Post()
         {
-            List<string> lst_db_folders = new List<string>();
-            JsonSerialization js = new JsonSerialization();
-            DataTransportStructure[] dts_arr = Common.Get_dts_from_request_body(HttpContext);
-            if (dts_arr.Length == 0)
-            {
-                return BadRequest(js.Serialize(new Result { Status = false, Description = "Input JSON is invalid." }));
-            }
+            object ret_data;
 
-            string Name     = Common.GetPFromTS("Name", dts_arr);
-            string Login    = Common.GetPFromTS("Login", dts_arr);
-            string Password = Common.GetPFromTS("Password", dts_arr);
-                        
-            if (Name.Trim() == "")
-            {
-                return BadRequest(js.Serialize(new Result { Status = false, Description = "No 'Name' member specyfied." }));
-            }
-    
-            string fullPath = Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(IsDataBaseAccessibleController)).Location);
-            using (StreamReader sr = new StreamReader(Path.Combine(fullPath,"settings.txt")))
-            {
-
-                string SettingsLine = "";
-                List<string> lst_setting = new List<string>();
-                string curr_section = "";
-                while (!sr.EndOfStream)
-                {
-                    SettingsLine = sr.ReadLine();
-                    switch (SettingsLine)
-                    {
-                        case "[folders]":
-                            curr_section = SettingsLine;
-                            break;
-                        default:
-                            switch (curr_section)
-                            {
-                                case "[folders]":
-                                    lst_db_folders.Add(SettingsLine);
-                                    break;
-                                default:
-                                    break;
-                            }
-                            break;
-                    }
-                }
-            }
-
-            //try to lock database in folders
+            string Name = "";
+            string Login = "";
+            string Password = "";
+            string Data = "";
             string db_path = "";
-            foreach (string folder in lst_db_folders)
+
+            Result ret = new CommonControllerProcs().PrepareEnvironmentForRequestHandling(HttpContext, ref Name, ref Login, ref Password, ref Data, ref db_path);
+            JsonSerialization js = new JsonSerialization();
+
+            if (!ret.Status)
             {
-                if (Directory.Exists(Path.Combine(Path.Combine(folder, Name))))
+                ret_data = Problem(js.Serialize(ret), null, ret.HttpCode);
+            }
+            else
+            {
+                using (v77Ops v77inst = new v77Ops())
                 {
-                    if (db_path.Trim() != "")
+                    ret = v77inst.CreateV77Instance();
+                    if (ret.Status)
                     {
-                        return Conflict(js.Serialize(new Result { Status = false, Description = "Bad settings file: more then one database in different folders!" }));
+                        ret = v77inst.IsDatabaseAccesible(Path.Combine(db_path, Name), Login, Password);
+                        if (ret.Status)
+                        {
+                            ret_data = Ok(js.Serialize(ret));
+                        }
+                        else
+                        {
+                            ret_data = Problem(js.Serialize(ret),null,500);
+                        }
                     }
-                    db_path = folder;
+                    else
+                    {
+                        ret_data = Problem(js.Serialize(ret), null,500);
+                    }
                 }
             }
+            return (ObjectResult)ret_data;
 
-            using (v77Ops v77inst = new v77Ops())
-            {
-                v77inst.CreateV77Instance();
-                //v77inst.ExecuteBatch(Convert.ToBase64String(b), @"C:\программист\77_test_db", "", "");
-                Result ret = v77inst.IsDatabaseAccesible(Path.Combine(db_path, Name), Login, Password);
-                return new ObjectResult(js.Serialize(ret));
-            }
         }
     }
 }

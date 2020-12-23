@@ -3,11 +3,65 @@ using Microsoft.Extensions.Hosting;
 
 namespace Tram
 {
+    public static class Args
+    {
+        public static int ssl_port = 0;
+        public static int port = 0;
+        public static string sert = "";
+        public static string sert_pwd = "";
+    }
+
     public class Program
     {
         public static void Main(string[] args)
         {
+            string loc_port_tag = "-PORT";
+            string loc_ssl_tag = "-SSLPORT";
+            string loc_sert_path_tag = "-SERTFILE";
+            string loc_sert_pwd_tag = "-SERTPWD";
+
+            foreach (string arg in args)
+            {
+                if (arg.Substring(0, loc_port_tag.Length).ToUpper() == loc_port_tag)
+                {
+                    try
+                    {
+                        Args.port = int.Parse(arg.Substring(loc_port_tag.Length, (arg.Length - loc_port_tag.Length)));
+                    }
+                    catch{}
+                }
+                
+                if (arg.Substring(0, loc_ssl_tag.Length).ToUpper() == loc_ssl_tag)
+                {
+                    try
+                    {
+                        Args.ssl_port = int.Parse(arg.Substring(loc_ssl_tag.Length, (arg.Length - loc_ssl_tag.Length)));
+                    }
+                    catch { }
+                }
+
+                if (arg.Substring(0, loc_sert_path_tag.Length).ToUpper() == loc_sert_path_tag)
+                {
+                    try
+                    {
+                        Args.sert = arg.Substring(loc_sert_path_tag.Length, (arg.Length - loc_sert_path_tag.Length)).Trim();
+                    }
+                    catch { }
+                }
+
+                if (arg.Substring(0, loc_sert_pwd_tag.Length).ToUpper() == loc_sert_pwd_tag)
+                {
+                    try
+                    {
+                        Args.sert_pwd = arg.Substring(loc_sert_pwd_tag.Length, (arg.Length - loc_sert_pwd_tag.Length)).Trim();
+                    }
+                    catch { }
+                }
+
+            }
+
             CreateHostBuilder(args).Build().Run();
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -16,5 +70,6 @@ namespace Tram
                 {
                     webBuilder.UseStartup<Startup>();
                 });
+
     }
 }

@@ -138,7 +138,7 @@ namespace Tram
                     }
                     catch { };
 
-                    return new Result { Status = false, Description = "Can't retrieve 'RMTrade' variable from com-server!" };
+                    return new Result { Status = false, Description = "Не удалось получить переменную 'RMTrade' из com-сервера 1с 7.7!" };
                 }
 
                 object[] init_params = new object[3];
@@ -154,7 +154,7 @@ namespace Tram
                         File.Delete(tmp_fn);
                     }
                     catch { };
-                    return new Result { Status = false, Description = "Fail to connect to database." };
+                    return new Result { Status = false, Description = "Не удалось подключиться к базе данных." };
                 }
 
                 string Batch = "ОткрытьФорму(\"Отчет\"" + ", \"\", \"" + tmp_fn + "\")";
@@ -182,7 +182,7 @@ namespace Tram
                     }
                     else
                     {
-                        return new Result { Status = false, Description = "Fail to invoke 1c 77 method 'CreateObject(\"Query\")' (reason: unknown)" };
+                        return new Result { Status = false, Description = "Не удалось вызвать метод 1c 77 'CreateObject(\"Query\")' (это проверка com-соединения) (причина не понятна)" };
                     }
                 }
                 catch (Exception e)
@@ -195,11 +195,11 @@ namespace Tram
 
                     if (e.InnerException != null)
                     {
-                        return new Result { Status = false, Description = "Fail to invoke 1c 77 method 'ОткрытьОтчет' (" + e.InnerException.Message + ")" };
+                        return new Result { Status = false, Description = "Не удалось вызвать 1c 77 метод 'ОткрытьОтчет' (" + e.InnerException.Message + ")" };
                     }
                     else
                     {
-                        return new Result { Status = false, Description = "Fail to invoke 1c 77 method 'ОткрытьОтчет' (" + e.Message + ")" };
+                        return new Result { Status = false, Description = "Не удалось вызвать 1c 77 метод 'ОткрытьОтчет' (" + e.Message + ")" };
                     }
 
                 }
@@ -274,7 +274,7 @@ namespace Tram
                 {
                     KillTmpFiles(fn_to_kill);
 
-                    return new Result { Status = false, Description = "Can't retrieve 'RMTrade' variable from com-server!" };
+                    return new Result { Status = false, Description = "Не удалось получить переменную 'RMTrade' из com-сервера 1с 7.7!" };
                 }
 
                 object[] init_params = new object[3];
@@ -286,7 +286,7 @@ namespace Tram
                     null, v77_instance, init_params))
                 {
                     KillTmpFiles(fn_to_kill);
-                    return new Result { Status = false, Description = "Fail to connect to database." };
+                    return new Result { Status = false, Description = "Не удалось подключиться к базе данных." };
                 }
 
                 string Batch = "ОткрытьФорму(\"Отчет\"" + ", \"" + fn_to_kill.GetValueOrDefault("fn_result") + "\", \"" + fn_to_kill.GetValueOrDefault("fn_empty") + "\")";
@@ -312,7 +312,7 @@ namespace Tram
                                 {
                                     KillTmpFiles(fn_to_kill);
 
-                                    return new Result { Status = false, Description = "Empty results file detected after executing." };
+                                    return new Result { Status = false, Description = "Файл результатов пустой." };
 
                                 }
 
@@ -341,7 +341,7 @@ namespace Tram
                         {
                             KillTmpFiles(fn_to_kill);
 
-                            return new Result { Status = false, Description = "No results detected after executing. 1c 7.7 framework crashed, may be..." };
+                            return new Result { Status = false, Description = "После выполнения кода на стороне 1c 7.7 - файл результатов не обнаружен. Возможно процесс 1с упал." };
                         }
 
                     }
@@ -349,7 +349,7 @@ namespace Tram
                     {
                         KillTmpFiles(fn_to_kill);
 
-                        return new Result { Status = false, Description = "Fail to invoke 'ExecuteBatch' " };
+                        return new Result { Status = false, Description = "Не удалось выполнить 'ExecuteBatch' " };
 
                     }
 
@@ -358,7 +358,7 @@ namespace Tram
                 {
                     KillTmpFiles(fn_to_kill);
 
-                    return new Result { Status = false, Description = "Fail to invoke 1c 77 method 'ОткрытьОтчет' " };
+                    return new Result { Status = false, Description = "Не удалось выполнить метод 'ОткрытьОтчет' " };
                 }
 
             }
