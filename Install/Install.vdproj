@@ -15,7 +15,31 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_0E826BE14DF34FD09A39EAC29C72841B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_42E2950B1FCD4D9EA267AF4FECBD203A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_47F557922F9D41839DF8315D4401B9AC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_4E94D75E14DD47408C24A7C66FC2F1C9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4FA092B4E401424196853CBCF882F2E8"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -27,14 +51,50 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_B279DF4373C445179F2CFE55D2FD6B25"
+        "MsmKey" = "8:_70457466063A46A994D1F48E402C1746"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_D604E78E56BD417BBFBD49B735D32752"
+        "MsmKey" = "8:_88FD994E8FCD4EA88F581CF0B7C9B67E"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8AA2147A92A20E57F21BB1B446C9660F"
+        "OwnerKey" = "8:_70457466063A46A994D1F48E402C1746"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A26795D7110449D895F1AB0E30641F4E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_F5A548698F2140C0A5F9B20A0FA3F0CB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_F5A548698F2140C0A5F9B20A0FA3F0CB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_70457466063A46A994D1F48E402C1746"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_8AA2147A92A20E57F21BB1B446C9660F"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -62,6 +122,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -85,13 +153,13 @@
             "PromptEnabled" = "11:TRUE"
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
-            "ComponentsUrl" = "8:"
+            "ComponentsUrl" = "8:https://download.visualstudio.microsoft.com/download/pr/3366b2e6-ed46-48ae-bf7b-f5804f6ee4c9/186f681ff967b509c6c9ad31d3d343da/dotnet-sdk-3.1.404-win-x64.exe"
                 "Items"
                 {
-                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5.2"
                     {
-                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 и x64)"
-                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    "Name" = "8:Microsoft .NET Framework 4.5.2 (x86 и x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5.2"
                     }
                 }
             }
@@ -101,6 +169,34 @@
     {
         "CustomAction"
         {
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_18DEE17C6F5340B1B7ECF1DE10BFCD39"
+            {
+            "Name" = "8:Remover.exe"
+            "Condition" = "8:"
+            "Object" = "8:_A26795D7110449D895F1AB0E30641F4E"
+            "FileType" = "3:2"
+            "InstallAction" = "3:4"
+            "Arguments" = "8:/Uninstall"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_380EDFC6_3AB1_4FD2_9EB1_68E4CB8BE476"
+            "InstallerClass" = "11:FALSE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_7411BE11CF574EBA9E96EF5AF49B1CEB"
+            {
+            "Name" = "8:Deployer.exe"
+            "Condition" = "8:"
+            "Object" = "8:_0E826BE14DF34FD09A39EAC29C72841B"
+            "FileType" = "3:2"
+            "InstallAction" = "3:2"
+            "Arguments" = "8:/Commit"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_5DAC0141_D041_4EF5_AFEC_41A44FB5A54F"
+            "InstallerClass" = "11:FALSE"
+            "CustomActionData" = "8:"
+            }
         }
         "DefaultFeature"
         {
@@ -122,10 +218,58 @@
                 "Architecture" = "2:0"
                 "Runtime" = "2:0"
                 }
+                "{A06ECF26-33A3-4562-8140-9B0E340D4F24}:_F691ED5EEDC1442BB199E6BD65DF6688"
+                {
+                "Name" = "8:.NET Framework"
+                "Message" = "8:[VSDNETMSG]"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.7.2"
+                "AllowLaterVersions" = "11:FALSE"
+                "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=863262"
+                }
             }
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0E826BE14DF34FD09A39EAC29C72841B"
+            {
+            "SourcePath" = "8:..\\Deployer\\bin\\x64\\Release\\netcoreapp3.1\\Deployer.exe"
+            "TargetName" = "8:Deployer.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_A684D7E9D57E48F48747A2642286EA31"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_47F557922F9D41839DF8315D4401B9AC"
+            {
+            "SourcePath" = "8:..\\Tram\\bin\\x64\\Release\\netcoreapp3.1\\Tram.exe"
+            "TargetName" = "8:Tram.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_A684D7E9D57E48F48747A2642286EA31"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4E94D75E14DD47408C24A7C66FC2F1C9"
             {
             "SourcePath" = "8:..\\Tram\\Settings.txt"
@@ -166,10 +310,72 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D604E78E56BD417BBFBD49B735D32752"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8AA2147A92A20E57F21BB1B446C9660F"
             {
-            "SourcePath" = "8:..\\Tram\\bin\\Release\\netcoreapp3.1\\Tram.exe"
-            "TargetName" = "8:Tram.exe"
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+                "ScatterAssemblies"
+                {
+                    "_8AA2147A92A20E57F21BB1B446C9660F"
+                    {
+                    "Name" = "8:System.Net.Http.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:System.Net.Http.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A684D7E9D57E48F48747A2642286EA31"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A26795D7110449D895F1AB0E30641F4E"
+            {
+            "SourcePath" = "8:..\\Remover\\bin\\x64\\Release\\netcoreapp3.1\\Remover.exe"
+            "TargetName" = "8:Remover.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_A684D7E9D57E48F48747A2642286EA31"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_F5A548698F2140C0A5F9B20A0FA3F0CB"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:InstallUtil, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=AMD64"
+                "ScatterAssemblies"
+                {
+                    "_F5A548698F2140C0A5F9B20A0FA3F0CB"
+                    {
+                    "Name" = "8:InstallUtil.exe"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\InstallUtil.exe"
+            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A684D7E9D57E48F48747A2642286EA31"
             "Condition" = "8:"
@@ -205,7 +411,7 @@
             }
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_A684D7E9D57E48F48747A2642286EA31"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -243,7 +449,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Tram"
         "ProductCode" = "8:{A965D4AE-FEDC-4051-934B-5FEDA5FA4B0F}"
-        "PackageCode" = "8:{ADC3B1F1-5333-41EE-B2CC-AAC99AF06CFB}"
+        "PackageCode" = "8:{C8717C27-5084-46B2-9AED-310568CD692D}"
         "UpgradeCode" = "8:{7778FE92-F98E-4CD7-AF7B-23AA6EE25450}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -264,7 +470,7 @@
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
-        "TargetPlatform" = "3:0"
+        "TargetPlatform" = "3:1"
         "PreBuildEvent" = "8:"
         "PostBuildEvent" = "8:"
         "RunPostBuildEvent" = "3:0"
@@ -762,9 +968,37 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B279DF4373C445179F2CFE55D2FD6B25"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_42E2950B1FCD4D9EA267AF4FECBD203A"
             {
-            "SourcePath" = "8:..\\Tram\\obj\\Debug\\netcoreapp3.1\\Tram.dll"
+            "SourcePath" = "8:..\\Remover\\obj\\x64\\Release\\netcoreapp3.1\\Remover.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A684D7E9D57E48F48747A2642286EA31"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{AA63F52F-AAE7-4ABD-8CC1-BA96A845571E}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_4FA092B4E401424196853CBCF882F2E8"
+            {
+            "SourcePath" = "8:..\\Tram\\obj\\x64\\Release\\netcoreapp3.1\\Tram.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_A684D7E9D57E48F48747A2642286EA31"
@@ -785,6 +1019,62 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{FE76AED4-BC26-4784-AFB4-813191026404}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_70457466063A46A994D1F48E402C1746"
+            {
+            "SourcePath" = "8:..\\TramSrv\\obj\\x64\\Release\\TramSrv.exe"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A684D7E9D57E48F48747A2642286EA31"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{F97629C0-8E32-49CA-A643-19349CE3D998}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_88FD994E8FCD4EA88F581CF0B7C9B67E"
+            {
+            "SourcePath" = "8:..\\Deployer\\obj\\x64\\Release\\netcoreapp3.1\\Deployer.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_A684D7E9D57E48F48747A2642286EA31"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:1"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{0847F7F7-A0AB-4F5D-BD4E-C317AF39A0FA}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {
