@@ -213,18 +213,18 @@
                 "Name" = "8:.NET Core"
                 "Message" = "8:[VSDNETCOREMSG]"
                 "AllowLaterVersions" = "11:FALSE"
-                "InstallUrl" = "8:https://dotnet.microsoft.com/download/dotnet-core/[NetCoreVerMajorDotMinor]"
+                "InstallUrl" = "8:https://download.visualstudio.microsoft.com/download/pr/9065e596-b3fa-4255-b4ba-aab624ace4ba/634172a4677a39aff1f761b4c728d01d/dotnet-sdk-3.1.110-win-x64.exe"
                 "IsNETCore" = "11:TRUE"
-                "Architecture" = "2:0"
-                "Runtime" = "2:0"
+                "Architecture" = "2:2"
+                "Runtime" = "2:1"
                 }
                 "{A06ECF26-33A3-4562-8140-9B0E340D4F24}:_F691ED5EEDC1442BB199E6BD65DF6688"
                 {
                 "Name" = "8:.NET Framework"
                 "Message" = "8:[VSDNETMSG]"
-                "FrameworkVersion" = "8:.NETFramework,Version=v4.7.2"
+                "FrameworkVersion" = "8:.NETFramework,Version=v4.5.2"
                 "AllowLaterVersions" = "11:FALSE"
-                "InstallUrl" = "8:http://go.microsoft.com/fwlink/?LinkId=863262"
+                "InstallUrl" = "8:https://download.microsoft.com/download/E/2/1/E21644B5-2DF2-47C2-91BD-63C560427900/NDP452-KB2901907-x86-x64-AllOS-ENU.exe"
                 }
             }
         }
@@ -449,7 +449,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Tram"
         "ProductCode" = "8:{A965D4AE-FEDC-4051-934B-5FEDA5FA4B0F}"
-        "PackageCode" = "8:{C8717C27-5084-46B2-9AED-310568CD692D}"
+        "PackageCode" = "8:{F93050D8-E454-485E-A30B-6C30A246F2F2}"
         "UpgradeCode" = "8:{7778FE92-F98E-4CD7-AF7B-23AA6EE25450}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
