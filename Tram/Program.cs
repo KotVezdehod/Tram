@@ -15,8 +15,6 @@ namespace Tram
         public static string sert = "";
         public static string sert_pwd = "";
 
-        public Dictionary<string >
-
     }
 
     public class Program
