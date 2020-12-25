@@ -24,8 +24,8 @@ namespace Tram
             services.Configure<KestrelServerOptions>(options =>
             {
                 options.AllowSynchronousIO = true;
-                options.Listen(IPAddress.Loopback, Args.port==0?5010:Args.port);
-                options.Listen(IPAddress.Loopback, Args.ssl_port==0?5011:Args.ssl_port, (ListenOptions) =>
+                options.Listen(IPAddress.Any, Args.port==0?5010:Args.port);
+                options.Listen(IPAddress.Any, Args.ssl_port==0?5011:Args.ssl_port, (ListenOptions) =>
                 {
                     if (Args.sert == "")
                     {

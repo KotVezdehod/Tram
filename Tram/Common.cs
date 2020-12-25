@@ -147,10 +147,7 @@ namespace Tram
 
             return ret;
         }
-
     }
-
-
 
     [Serializable]
     public class DataTransportStructure

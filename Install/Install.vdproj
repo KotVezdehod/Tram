@@ -57,13 +57,13 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_88FD994E8FCD4EA88F581CF0B7C9B67E"
+        "MsmKey" = "8:_740CD7A977CC45B9A0225ABFC6F4063B"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_8AA2147A92A20E57F21BB1B446C9660F"
+        "MsmKey" = "8:_9AF19C82659F60E59B81FC27D5959DAC"
         "OwnerKey" = "8:_70457466063A46A994D1F48E402C1746"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -94,7 +94,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_8AA2147A92A20E57F21BB1B446C9660F"
+        "OwnerKey" = "8:_9AF19C82659F60E59B81FC27D5959DAC"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -310,14 +310,14 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_8AA2147A92A20E57F21BB1B446C9660F"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_9AF19C82659F60E59B81FC27D5959DAC"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_8AA2147A92A20E57F21BB1B446C9660F"
+                    "_9AF19C82659F60E59B81FC27D5959DAC"
                     {
                     "Name" = "8:System.Net.Http.dll"
                     "Attributes" = "3:512"
@@ -449,7 +449,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Tram"
         "ProductCode" = "8:{A965D4AE-FEDC-4051-934B-5FEDA5FA4B0F}"
-        "PackageCode" = "8:{F93050D8-E454-485E-A30B-6C30A246F2F2}"
+        "PackageCode" = "8:{D3DF5926-637A-425F-9986-6CD02D9A92DC}"
         "UpgradeCode" = "8:{7778FE92-F98E-4CD7-AF7B-23AA6EE25450}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1052,7 +1052,7 @@
                 {
                 }
             }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_88FD994E8FCD4EA88F581CF0B7C9B67E"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_740CD7A977CC45B9A0225ABFC6F4063B"
             {
             "SourcePath" = "8:..\\Deployer\\obj\\x64\\Release\\netcoreapp3.1\\Deployer.dll"
             "TargetName" = "8:"

@@ -1,2 +1,2 @@
-[folders]
+﻿[folders]
 C:\1c77DB

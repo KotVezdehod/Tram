@@ -56,5 +56,16 @@ namespace Tram.Controllers
             }
             return (ObjectResult)ret_data;
         }
+
+
+        //[HttpGet]
+        //public async Task<ActionResult> Get()
+        //{
+
+        //    return Ok("Ok");
+        //}
     }
+
+
+
 }

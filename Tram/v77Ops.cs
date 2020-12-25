@@ -414,7 +414,7 @@ namespace Tram
             try
             {
                 v77_instance = Activator.CreateInstance(v7_1c_comm_conn_cls_type);
-
+                
                 if (v77_instance == null)
                 {
                     res.Status = false;

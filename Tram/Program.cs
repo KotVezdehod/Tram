@@ -2,6 +2,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 //using Microsoft.AspNetCore.Hosting.WindowsServices;
 using Microsoft.Extensions.Hosting;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
@@ -13,6 +14,9 @@ namespace Tram
         public static int port = 0;
         public static string sert = "";
         public static string sert_pwd = "";
+
+        public Dictionary<string >
+
     }
 
     public class Program
@@ -85,6 +89,7 @@ namespace Tram
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    //webBuilder.UseUrls("http://0.0.0.0:5010");
                 });
 
     }
