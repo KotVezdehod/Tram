@@ -18,13 +18,19 @@ namespace Tram
 
             try
             {
-                
+
+                string Каталог77 = Assembly.GetAssembly(v7_1c_comm_conn_cls_type).Location;
+                logger.RecordEntry("Tram: каталог 77: " + Каталог77);
 
                 string СтрокаЛогина = Login == "" ? "" : " /n" + "\"" + Login + "\"";
                 string СтрокаПароля = Password == "" ? "" : " /p" + "\"" + Password + "\"";
                 //string conn = "\"" + Каталог77 + "\"" + " /D" + "\"" + DataBasePath + "\"" + СтрокаЛогина + СтрокаПароля;
                 string conn = "/D" + "\"" + DataBasePath + "\"" + СтрокаЛогина + СтрокаПароля;
+
+                logger.RecordEntry("Tram: строка подключения: " + conn);
+                
                 dynamic RMTrade = v7_1c_comm_conn_cls_type.InvokeMember("RMTrade", BindingFlags.Public | BindingFlags.GetProperty, null, v77_instance, null);
+                              
 
                 if (RMTrade == null)
                 {
@@ -124,9 +130,13 @@ namespace Tram
             try
             {
                 string Каталог77 = Assembly.GetAssembly(v7_1c_comm_conn_cls_type).Location;
+                logger.RecordEntry("Tram: каталог 77: " + Каталог77);
                 string СтрокаЛогина = Login == "" ? "" : " /n" + "\"" + Login + "\"";
                 string СтрокаПароля = Password == "" ? "" : " /p" + "\"" + Password + "\"";
-                string conn = "\"" + Каталог77 + "\"" + " /D" + "\"" + DataBasePath + "\"" + СтрокаЛогина + СтрокаПароля;
+                //string conn = "\"" + Каталог77 + "\"" + " /D" + "\"" + DataBasePath + "\"" + СтрокаЛогина + СтрокаПароля;
+                string conn = "/D" + "\"" + DataBasePath + "\"" + СтрокаЛогина + СтрокаПароля;
+
+                logger.RecordEntry("Tram: строка подключения: " + conn);
 
                 dynamic RMTrade = v7_1c_comm_conn_cls_type.InvokeMember("RMTrade", BindingFlags.Public | BindingFlags.GetProperty, null, v77_instance, null);
 
@@ -263,10 +273,15 @@ namespace Tram
             {
                 string Каталог77 = Assembly.GetAssembly(v7_1c_comm_conn_cls_type).Location;
 
+                logger.RecordEntry("Tram: каталог 77: " + Каталог77);
+
                 string СтрокаЛогина = Login == "" ? "" : " /n" + "\"" + Login + "\"";
                 string СтрокаПароля = Password == "" ? "" : " /p" + "\"" + Password + "\"";
 
-                string conn = "\"" + Каталог77 + "\"" + " /D" + "\"" + DataBasePath + "\"" + СтрокаЛогина + СтрокаПароля;
+                //string conn = "\"" + Каталог77 + "\"" + " /D" + "\"" + DataBasePath + "\"" + СтрокаЛогина + СтрокаПароля;
+                string conn = "/D" + "\"" + DataBasePath + "\"" + СтрокаЛогина + СтрокаПароля;
+
+                logger.RecordEntry("Tram: строка подключения: " + conn);
 
                 dynamic RMTrade = v7_1c_comm_conn_cls_type.InvokeMember("RMTrade", BindingFlags.Public | BindingFlags.GetProperty, null, v77_instance, null);
 

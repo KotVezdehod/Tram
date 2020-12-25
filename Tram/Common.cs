@@ -60,25 +60,29 @@ namespace Tram
                 ret.Status = false;
                 ret.Description = "Входной пакет JSON ошибочен.";
                 ret.HttpCode = 400;
+                logger.RecordEntry("Tram: " + ret.Description);
             }
             else
             {
-
                 if (Name.Trim() == "")
                 {
                     ret.Status = false;
                     ret.Description = "Не определен член 'Name' структуры запроса.";
                     ret.HttpCode = 400;
+                    logger.RecordEntry("Tram: " + ret.Description);
 
                 }
                 else
                 {
+                    logger.RecordEntry("Tram: читаю настройки 'settings.txt'...");
+
                     string fullPath = Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(CommonControllerProcs)).Location);
                     if (!File.Exists(Path.Combine(fullPath, "settings.txt")))
                     {
                         ret.Status = false;
                         ret.Description = "В каталоге программы не обнаружен файл настроек 'Settings.txt'.";
                         ret.HttpCode = 500;
+                        logger.RecordEntry("Tram: " + ret.Description);
                     }
                     else
                     {
@@ -128,6 +132,7 @@ namespace Tram
                                     ret.Status = false;
                                     ret.Description = "Файл настроек с ошибками. Обнаружено 2 базы данных с одним именем.";
                                     ret.HttpCode = 500;
+                                    logger.RecordEntry("Tram: " + ret.Description);
                                     break;
                                 }
                                 db_path = folder;
@@ -139,6 +144,8 @@ namespace Tram
                             ret.Status = false;
                             ret.Description = "В файле настроек не указан каталог баз данных, либо база данных по указанному пути не существует!";
                             ret.HttpCode = 500;
+
+                            logger.RecordEntry("Tram: " + ret.Description);
                         }
                     }
 

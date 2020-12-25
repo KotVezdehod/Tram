@@ -20,6 +20,8 @@ namespace Tram
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            logger.RecordEntry("Tram: конфигурирую Kestrel...");
             // If using Kestrel:
             services.Configure<KestrelServerOptions>(options =>
             {
@@ -61,6 +63,8 @@ namespace Tram
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            logger.RecordEntry("Tram: конфигурирую конвеер...");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

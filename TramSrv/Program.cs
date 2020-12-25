@@ -9,11 +9,13 @@ namespace TramSrv
         public static int port = 0;
         public static string sert = "";
         public static string sert_pwd = "";
+        public static string log_file = "";
 
         public const string loc_port_tag = "-PORT";
         public const string loc_ssl_tag = "-SSLPORT";
         public const string loc_sert_path_tag = "-SERTFILE";
         public const string loc_sert_pwd_tag = "-SERTPWD";
+        public const string loc_log_file = "-LOGFILE";
 
         public static Process main_proc;
         /// <summary>
@@ -61,6 +63,15 @@ namespace TramSrv
                     try
                     {
                         sert_pwd = arg.Substring(loc_sert_pwd_tag.Length, (arg.Length - loc_sert_pwd_tag.Length)).Trim();
+                    }
+                    catch { }
+                }
+
+                if (arg.Substring(0, loc_log_file.Length).ToUpper() == loc_log_file)
+                {
+                    try
+                    {
+                        log_file = arg.Substring(loc_log_file.Length, (arg.Length - loc_log_file.Length)).Trim();
                     }
                     catch { }
                 }

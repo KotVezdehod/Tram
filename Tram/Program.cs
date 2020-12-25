@@ -1,9 +1,6 @@
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-//using Microsoft.AspNetCore.Hosting.WindowsServices;
 using Microsoft.Extensions.Hosting;
-using System.Collections.Generic;
-using System.Diagnostics;
+using System;
 using System.IO;
 
 namespace Tram
@@ -14,7 +11,28 @@ namespace Tram
         public static int port = 0;
         public static string sert = "";
         public static string sert_pwd = "";
+        public static string log_file = "";
+    }
 
+    public static class logger
+    {
+        public static object obj = new object();
+
+        public static void RecordEntry(string Event)
+        {
+            if (Args.log_file.Trim() != "")
+            {
+                lock (obj)
+                {
+                    using (StreamWriter writer = new StreamWriter(Args.log_file, true))
+                    {
+                        writer.WriteLine(String.Format("{0} {1}",
+                            DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss"), Event));
+                        writer.Flush();
+                    }
+                }
+            }
+        }
     }
 
     public class Program
@@ -25,23 +43,39 @@ namespace Tram
             string loc_ssl_tag = "-SSLPORT";
             string loc_sert_path_tag = "-SERTFILE";
             string loc_sert_pwd_tag = "-SERTPWD";
+            string loc_log_file = "-LOGFILE";
+
+            logger.RecordEntry("=== Tram: я запустился.");
 
             foreach (string arg in args)
             {
+                if (arg.Substring(0, loc_log_file.Length).ToUpper() == loc_log_file)
+                {
+                    try
+                    {
+                        Args.log_file = arg.Substring(loc_log_file.Length, (arg.Length - loc_log_file.Length));
+
+                        logger.RecordEntry("Tram: найден аргумент: '" + loc_log_file + "'");
+                    }
+                    catch { }
+                }
+
                 if (arg.Substring(0, loc_port_tag.Length).ToUpper() == loc_port_tag)
                 {
                     try
                     {
                         Args.port = int.Parse(arg.Substring(loc_port_tag.Length, (arg.Length - loc_port_tag.Length)));
+                        logger.RecordEntry("Tram: найден аргумент: '" + loc_port_tag + "'");
                     }
-                    catch{}
+                    catch { }
                 }
-                
+
                 if (arg.Substring(0, loc_ssl_tag.Length).ToUpper() == loc_ssl_tag)
                 {
                     try
                     {
                         Args.ssl_port = int.Parse(arg.Substring(loc_ssl_tag.Length, (arg.Length - loc_ssl_tag.Length)));
+                        logger.RecordEntry("Tram: найден аргумент: '" + loc_ssl_tag + "'");
                     }
                     catch { }
                 }
@@ -51,6 +85,7 @@ namespace Tram
                     try
                     {
                         Args.sert = arg.Substring(loc_sert_path_tag.Length, (arg.Length - loc_sert_path_tag.Length)).Trim();
+                        logger.RecordEntry("Tram: найден аргумент: '" + loc_sert_path_tag + "'");
                     }
                     catch { }
                 }
@@ -60,23 +95,12 @@ namespace Tram
                     try
                     {
                         Args.sert_pwd = arg.Substring(loc_sert_pwd_tag.Length, (arg.Length - loc_sert_pwd_tag.Length)).Trim();
+                        logger.RecordEntry("Tram: найден аргумент: '" + loc_sert_pwd_tag + "'");
                     }
                     catch { }
                 }
 
             }
-
-            //// получаем путь к файлу 
-            //var pathToExe = Process.GetCurrentProcess().MainModule.FileName;
-            //// путь к каталогу проекта
-            //var pathToContentRoot = Path.GetDirectoryName(pathToExe);
-            //// создаем хост
-
-            //var host = WebHost.CreateDefaultBuilder(args)
-            //    .UseContentRoot(pathToContentRoot)
-            //    .UseStartup<Startup>()
-            //    .Build();
-            //host.RunAsService();
 
             CreateHostBuilder(args).Build().Run();
 
@@ -87,7 +111,6 @@ namespace Tram
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    //webBuilder.UseUrls("http://0.0.0.0:5010");
                 });
 
     }

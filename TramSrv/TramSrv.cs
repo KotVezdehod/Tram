@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.ServiceProcess;
 using System.Threading;
@@ -9,7 +10,7 @@ namespace TramSrv
     public partial class TramSrv : ServiceBase
     {
         
-        //Logger logger;
+        Logger logger = new Logger();
         public TramSrv()
         {
             InitializeComponent();
@@ -21,11 +22,10 @@ namespace TramSrv
         protected override void OnStart(string[] args)
         {
 
-            
+            Thread loggerThread = new Thread(new ThreadStart(logger.Start));
+            loggerThread.Start();
 
-            //logger = new Logger();
-            //Thread loggerThread = new Thread(new ThreadStart(logger.Start));
-            //loggerThread.Start();
+            logger.RecordEntry("===== СЛУЖБА: Запускается процесс 'Tram'");
 
             Task.Factory.StartNew(()=>MainWork());
 
@@ -55,6 +55,7 @@ namespace TramSrv
             if (Program.ssl_port > 0)
             {
                 args = Program.loc_ssl_tag + Program.ssl_port.ToString();
+                
             }
 
             if (Program.port > 0)
@@ -72,90 +73,118 @@ namespace TramSrv
                 args = args + " " + Program.loc_sert_pwd_tag + Program.sert_pwd;
             }
 
+            logger.RecordEntry("СЛУЖБА: Аргументы: " + args);
 
             var pathToExe = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
             Program.main_proc = Process.Start(Path.Combine(pathToExe, "tram.exe"), args);
 
             Program.main_proc.WaitForExit();
 
+            logger.RecordEntry("===== СЛУЖБА: Процесс 'Tram' завершен");
+
+            logger.RecordEntry("===== СЛУЖБА: Останавливаюсь...");
             ServiceController service = new ServiceController("TramSrv");
             if (!((service.Status.Equals(ServiceControllerStatus.Stopped)) ||
             (service.Status.Equals(ServiceControllerStatus.StopPending))))
             {
                 service.Stop();
             }
+
+            logger.RecordEntry("===== СЛУЖБА: Остановился");
+
             return;
         }
 
     }
 
-    //class Logger
-    //{
-    //    FileSystemWatcher watcher;
-    //    object obj = new object();
-    //    bool enabled = true;
-    //    public Logger()
-    //    {
-    //        watcher = new FileSystemWatcher("D:\\Temp");
-    //        watcher.Deleted += Watcher_Deleted;
-    //        watcher.Created += Watcher_Created;
-    //        watcher.Changed += Watcher_Changed;
-    //        watcher.Renamed += Watcher_Renamed;
-    //    }
+    public class Logger
+    {
+        FileSystemWatcher watcher;
+        object obj = new object();
+        bool enabled = true;
+        public Logger()
+        {
+            string currDir = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
 
-    //    public void Start()
-    //    {
-    //        watcher.EnableRaisingEvents = true;
-    //        while (enabled)
-    //        {
-    //            Thread.Sleep(1000);
-    //        }
-    //    }
-    //    public void Stop()
-    //    {
-    //        watcher.EnableRaisingEvents = false;
-    //        enabled = false;
-    //    }
-    //    // переименование файлов
-    //    private void Watcher_Renamed(object sender, RenamedEventArgs e)
-    //    {
-    //        string fileEvent = "переименован в " + e.FullPath;
-    //        string filePath = e.OldFullPath;
-    //        RecordEntry(fileEvent, filePath);
-    //    }
-    //    // изменение файлов
-    //    private void Watcher_Changed(object sender, FileSystemEventArgs e)
-    //    {
-    //        string fileEvent = "изменен";
-    //        string filePath = e.FullPath;
-    //        RecordEntry(fileEvent, filePath);
-    //    }
-    //    // создание файлов
-    //    private void Watcher_Created(object sender, FileSystemEventArgs e)
-    //    {
-    //        string fileEvent = "создан";
-    //        string filePath = e.FullPath;
-    //        RecordEntry(fileEvent, filePath);
-    //    }
-    //    // удаление файлов
-    //    private void Watcher_Deleted(object sender, FileSystemEventArgs e)
-    //    {
-    //        string fileEvent = "удален";
-    //        string filePath = e.FullPath;
-    //        RecordEntry(fileEvent, filePath);
-    //    }
+            watcher = new FileSystemWatcher(currDir);
+            watcher.Deleted += Watcher_Deleted;
+            watcher.Created += Watcher_Created;
+            watcher.Changed += Watcher_Changed;
+            watcher.Renamed += Watcher_Renamed;
+        }
 
-    //    private void RecordEntry(string fileEvent, string filePath)
-    //    {
-    //        lock (obj)
-    //        {
-    //            using (StreamWriter writer = new StreamWriter("D:\\templog.txt", true))
-    //            {
-    //                writer.WriteLine(String.Format("{0} файл {1} был {2}",
-    //                    DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss"), filePath, fileEvent));
-    //                writer.Flush();
-    //            }
-    //        }
-    //    }
-    //}
+        public void Start()
+        {
+            watcher.EnableRaisingEvents = true;
+            while (enabled)
+            {
+                Thread.Sleep(1000);
+            }
+        }
+        public void Stop()
+        {
+            watcher.EnableRaisingEvents = false;
+            enabled = false;
+        }
+        // переименование файлов
+        private void Watcher_Renamed(object sender, RenamedEventArgs e)
+        {
+            string fileEvent = "переименован в " + e.FullPath;
+            string filePath = e.OldFullPath;
+            RecordEntry(fileEvent, filePath);
+        }
+        // изменение файлов
+        private void Watcher_Changed(object sender, FileSystemEventArgs e)
+        {
+            string fileEvent = "изменен";
+            string filePath = e.FullPath;
+            RecordEntry(fileEvent, filePath);
+        }
+        // создание файлов
+        private void Watcher_Created(object sender, FileSystemEventArgs e)
+        {
+            string fileEvent = "создан";
+            string filePath = e.FullPath;
+            RecordEntry(fileEvent, filePath);
+        }
+        // удаление файлов
+        private void Watcher_Deleted(object sender, FileSystemEventArgs e)
+        {
+            string fileEvent = "удален";
+            string filePath = e.FullPath;
+            RecordEntry(fileEvent, filePath);
+        }
+
+        private void RecordEntry(string fileEvent, string filePath)
+        {
+            if (Program.log_file.Trim() != "")
+            {
+                lock (obj)
+                {
+                    using (StreamWriter writer = new StreamWriter(Program.log_file, true))
+                    {
+                        writer.WriteLine(String.Format("{0} файл {1} был {2}",
+                            DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss"), filePath, fileEvent));
+                        writer.Flush();
+                    }
+                }
+            }
+        }
+
+        public void RecordEntry(string Event)
+        {
+            if (Program.log_file.Trim() != "")
+            {
+                lock (obj)
+                {
+                    using (StreamWriter writer = new StreamWriter(Program.log_file, true))
+                    {
+                        writer.WriteLine(String.Format("{0} {1}",
+                            DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss"), Event));
+                        writer.Flush();
+                    }
+                }
+            }
+        }
+    }
 }
