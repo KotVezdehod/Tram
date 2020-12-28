@@ -26,11 +26,7 @@ namespace TramSrv
 
             foreach (string arg in args)
             {
-                //using (StreamWriter sr = new StreamWriter("c:\\log111.txt", true))
-                //{
-                //    sr.WriteLine(arg);
-                //}
-
+                
                 if (arg.Substring(0, loc_port_tag.Length).ToUpper() == loc_port_tag)
                 {
                     try
